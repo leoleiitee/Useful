@@ -1,40 +1,58 @@
 #Include "TOTVS.ch"
+#include 'RPTDEF.ch'
 
 /*/{Protheus.doc} UserErro0
-( Fun√ß√£o que realiza o controle e tratamento de erro em ADVPL - Teste
- obs: Tratamento de exce√ß√£o utilizando final() dentro do begin sequence )
+( FunÁ„o que realiza o controle e tratamento de erro em ADVPL - Teste )
+@obs Tratamento de exceÁ„o utilizando final() dentro do begin sequence 
 @type function
 @version 1.0
-@author Leonardo
+@author Leonardo Barboza Ribeiro Leite
 @since 27/09/2022
 @return variant, Nulo
+@link https://tdn.totvs.com/display/public/framework/FWLogMsg
 /*/
 user Function UserErro0()
 
-    local bError As CodeBlock// TRATAMENTO DE ERRO
-    local cError As Character // MENSAGEM DE ERRO
+    local bError   as CodeBlock
+    local cError   as Character
+    local aMessage as Array 
+    local nBegin   as numeric
 
-    if (!IsBlind())
-        rpcSetEnv("99", "01")
-    endIf
-
-    // INICIALIZA√á√ÉO DE VARI√ÅVEIS
+    nBegin := Seconds()
     cError := space(0)
     bError := errorBlock({|oError| cError := oError:Description})
 
-    // IN√çCIO DA SEQU√äNCIA COM FINAL()
+    if (!IsBlind())
+        rpcSetEnv("99", "01")
+        // rpcSetEnv("01", "AADXD5")
+    endIf
+
     BEGIN SEQUENCE
-        final("Encerramento normal")
+
+        NdADOS := 1 + XIZ
+        MsgAlert( NdADOS )
+
     END SEQUENCE
 
     // TRANSFERE OERROR:DESCRIPTION PARA CERROR
     errorBlock(bError)
 
-    // VALIDA√á√ÉO DE ERRO
+    // VALIDA«√O DE ERRO
     if (!Empty(cError))
-        conOut(Repl("-", 80))
-        conOut(PadC("Error: " + AllTrim(cError), 80))
-        conOut(Repl("-", 80))
+
+        aMessage := {}
+        aAdd(aMessage, {"Date", Date()})
+        aAdd(aMessage, {"Hour", Time()})
+
+        if getRemoteType() != NO_REMOTE
+            aAdd(aMessage, {"Computer", GetClientIP()})
+            aAdd(aMessage, {"IP", GetClientIP()})
+        endif
+
+        aAdd(aMessage, {"Erro", cError})
+
+        FWLogMsg("ERROR", "LAST", "Grupo", "Categoria", 0 , "ID", '', 1, Seconds() - nBegin, aMessage)
+
     endIf
 
     // ENCERRAMENTO DE AMBIENTE EM CASO DE ESTADO DE JOB

@@ -7,9 +7,24 @@
 			"name": "Depuração do idioma TOTVS",
 			"program": "${command:AskForProgramName}",
 			"cwb": "${workspaceFolder}",
-			"smartclientBin": "../totvs/bin/smartclient/smartclient.exe",
+			"smartclientBin": "D:\\apply_system\\Projetos\\Midland\\smartclient_dev_33\\smartclient.exe",
 			"isMultiSession": true,
-			"enableTableSync": true
+			"enableTableSync": true,
+			"programArguments": [],
+			"enableMultiThread": true,
+			"enableProfile": true,
+			"isAccessibilityMode": false,
+			"doNotShowSplash": false,
+			"openglMode": false,
+			"dpiMode": false,
+			"language": "",
+			"ignoreFiles": false
 		}
-	]
+	],
+	"lastPrograms": [
+		{
+			"label": "U_USERERRO0"
+		}
+	],
+	"lastProgramExecuted": "U_USERERRO0"
 }
