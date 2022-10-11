@@ -24,7 +24,10 @@
 	"lastPrograms": [
 		{
 			"label": "U_USERERRO0"
+		},
+		{
+			"label": "U_imgenc01"
 		}
 	],
-	"lastProgramExecuted": "U_USERERRO0"
+	"lastProgramExecuted": "U_imgenc01"
 }

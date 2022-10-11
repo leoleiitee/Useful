@@ -124,7 +124,7 @@ static function abreArquivo( cDiret as character, aCab as array, aDados as array
 
         for nX := 1 to len( aAuxiliar )
             if len( StrTokArr( aAuxiliar[nX], ";" ) ) == len( aCab )
-                aAdd( aDados, StrTokArr( aAuxiliar[nX], ";" ) )
+                aAdd( aDados, StrTokArr( decodeUTF8(aAuxiliar[nX], 'cp1252'), ";" ) )
             else
                 final( 'Erro na validação da linha: ' + cValtoChar( nX ) )
                 lRet := .f.
@@ -175,12 +175,14 @@ static function grvRecl( cArq as character, aCab as array, aDados as array, cAli
 
     lRet:= .t.
 
-    dbSelectArea('SF4')
-    SF4->(dbSetOrder(1))
+    chkFile(cAlias)
+
+    dbSelectArea(cAlias)
+    &(cAlias)->(dbSetOrder(1))
 
     for nX := 1 to len( aDados )
 
-        if reclock( 'SF4', .t. )
+        if reclock( cAlias, .t. )
             for nY := 1 to len( aCab )
                 if existSx3( allTrim( aCab[nY] ) ) 
                     if alltrim(aDados[nX][nY]) != ''
