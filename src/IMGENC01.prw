@@ -32,7 +32,7 @@ user function imgenc01()
             aCab    := {}
             aDados  := {}
 
-            abreArquivo( @cArq, @aCab, @aDados, @cAlias, @cRotina )
+            _SabreArquivo( @cArq, @aCab, @aDados, @cAlias, @cRotina )
 
             if empty(cRotina )
                 grvRecl( @cArq, @aCab, @aDados, @cAlias, @aErro )
