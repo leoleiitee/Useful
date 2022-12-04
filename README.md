@@ -7,3 +7,5 @@ FONTES     | DESCRIÇÃO
 -----------|------------------------------------------------------------------
 userErro0  | Funcao que realiza o controle e tratamento de erro em ADVPL
 imgenc01   | Funcao que realiza a importação de quelquer CSV para uma tabela do protheus, via reclock ou execauto.
+AdvplExec  | Funcao para execução de fontes advpl via menu.
+cpyfServ   | Funcao para copiar um arquivo de uma pasta do servidor para o diretorio local e vice-versa.
